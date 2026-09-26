@@ -1,0 +1,114 @@
+### Get all aircraft
+GET http://localhost:8080/aircraft
+
+### Create aircraft
+POST http://localhost:8080/aircraft
+Content-Type: application/json
+
+{
+  "manufacturer": "Boeing",
+  "model": "F/A-18E Super Hornet",
+  "type": "Fighter Aircraft",
+  "maxSpeed": 1190,
+  "range": 1275,
+  "crew": 1,
+  "firstFlight": "1995-11-29",
+  "status": "Active"
+}
+
+### Get all missions
+GET http://localhost:8080/missions
+
+### Create mission
+POST http://localhost:8080/missions
+Content-Type: application/json
+
+{
+  "name": "Artemis II",
+  "agency": "NASA",
+  "vehicle": "Orion",
+  "destination": "Moon",
+  "launchDate": "2026",
+  "status": "Planned",
+  "crewSize": 4
+}
+
+### Update aircraft
+PUT http://localhost:8080/aircraft/6ab81f7cebd7c43645b6ebe9
+Content-Type: application/json
+
+{
+  "manufacturer": "Boeing",
+  "model": "F/A-18E Super Hornet",
+  "type": "Fighter Aircraft",
+  "maxSpeed": 1200,
+  "range": 1300,
+  "crew": 1,
+  "firstFlight": "1995-11-29",
+  "status": "Active - Updated"
+}
+
+### Update mission
+PUT http://localhost:8080/missions/6ab825541d7e5714ea2e6447
+Content-Type: application/json
+
+{
+  "name": "Artemis II",
+  "agency": "NASA",
+  "vehicle": "Orion",
+  "destination": "Moon",
+  "launchDate": "2026",
+  "status": "Ready for Launch",
+  "crewSize": 4
+}
+
+### Test aircraft validation - should return 400
+POST http://localhost:8080/aircraft
+Content-Type: application/json
+
+{
+  "manufacturer": "Boeing"
+}
+
+### Test mission validation - should return 400
+POST http://localhost:8080/missions
+Content-Type: application/json
+
+{
+  "name": "Artemis II"
+}
+
+### Create temporary aircraft for DELETE test
+POST http://localhost:8080/aircraft
+Content-Type: application/json
+
+{
+  "manufacturer": "Test Company",
+  "model": "Delete Me",
+  "type": "Test Aircraft",
+  "maxSpeed": 500,
+  "range": 1000,
+  "crew": 2,
+  "firstFlight": "2026-01-01",
+  "status": "Test"
+}
+
+### Delete temporary aircraft
+DELETE http://localhost:8080/aircraft/6ab82a3e1d7e5714ea2e6448
+
+### Create temporary mission for DELETE test
+POST http://localhost:8080/missions
+Content-Type: application/json
+
+{
+  "name": "Delete Test Mission",
+  "agency": "Test Agency",
+  "vehicle": "Test Vehicle",
+  "destination": "Test Destination",
+  "launchDate": "2026-12-01",
+  "status": "Test",
+  "crewSize": 2
+}
+
+### Delete temporary mission
+DELETE http://localhost:8080/missions/6ab82ae81d7e5714ea2e6449

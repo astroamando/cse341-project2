@@ -1,0 +1,368 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Aerospace API",
+    "description": "CSE 341 Project 2 API for aircraft and space missions"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": ["http"],
+  "tags": [
+    {
+      "name": "Aircraft",
+      "description": "Aircraft CRUD operations"
+    },
+    {
+      "name": "Missions",
+      "description": "Space mission CRUD operations"
+    }
+  ],
+  "paths": {
+    "/aircraft": {
+      "get": {
+        "tags": ["Aircraft"],
+        "summary": "Get all aircraft",
+        "responses": {
+          "200": {
+            "description": "Aircraft retrieved successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Aircraft"],
+        "summary": "Create a new aircraft",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Aircraft"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Aircraft created successfully"
+          },
+          "400": {
+            "description": "Invalid aircraft data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/aircraft/{id}": {
+      "get": {
+        "tags": ["Aircraft"],
+        "summary": "Get one aircraft by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Aircraft retrieved successfully"
+          },
+          "400": {
+            "description": "Invalid aircraft ID"
+          },
+          "404": {
+            "description": "Aircraft not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Aircraft"],
+        "summary": "Update an aircraft",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Aircraft"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Aircraft updated successfully"
+          },
+          "400": {
+            "description": "Invalid aircraft data"
+          },
+          "404": {
+            "description": "Aircraft not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Aircraft"],
+        "summary": "Delete an aircraft",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Aircraft deleted successfully"
+          },
+          "400": {
+            "description": "Invalid aircraft ID"
+          },
+          "404": {
+            "description": "Aircraft not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/missions": {
+      "get": {
+        "tags": ["Missions"],
+        "summary": "Get all missions",
+        "responses": {
+          "200": {
+            "description": "Missions retrieved successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Missions"],
+        "summary": "Create a new mission",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Mission"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Mission created successfully"
+          },
+          "400": {
+            "description": "Invalid mission data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/missions/{id}": {
+      "get": {
+        "tags": ["Missions"],
+        "summary": "Get one mission by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mission retrieved successfully"
+          },
+          "400": {
+            "description": "Invalid mission ID"
+          },
+          "404": {
+            "description": "Mission not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Missions"],
+        "summary": "Update a mission",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Mission"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Mission updated successfully"
+          },
+          "400": {
+            "description": "Invalid mission data"
+          },
+          "404": {
+            "description": "Mission not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Missions"],
+        "summary": "Delete a mission",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mission deleted successfully"
+          },
+          "400": {
+            "description": "Invalid mission ID"
+          },
+          "404": {
+            "description": "Mission not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Aircraft": {
+      "type": "object",
+      "required": [
+        "manufacturer",
+        "model",
+        "type",
+        "maxSpeed",
+        "range",
+        "crew",
+        "firstFlight",
+        "status"
+      ],
+      "properties": {
+        "manufacturer": {
+          "type": "string",
+          "example": "Boeing"
+        },
+        "model": {
+          "type": "string",
+          "example": "F/A-18E Super Hornet"
+        },
+        "type": {
+          "type": "string",
+          "example": "Fighter Aircraft"
+        },
+        "maxSpeed": {
+          "type": "number",
+          "example": 1200
+        },
+        "range": {
+          "type": "number",
+          "example": 1300
+        },
+        "crew": {
+          "type": "integer",
+          "example": 1
+        },
+        "firstFlight": {
+          "type": "string",
+          "example": "1995-11-29"
+        },
+        "status": {
+          "type": "string",
+          "example": "Active"
+        }
+      }
+    },
+    "Mission": {
+      "type": "object",
+      "required": [
+        "name",
+        "agency",
+        "vehicle",
+        "destination",
+        "launchDate",
+        "status",
+        "crewSize"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Artemis II"
+        },
+        "agency": {
+          "type": "string",
+          "example": "NASA"
+        },
+        "vehicle": {
+          "type": "string",
+          "example": "Orion"
+        },
+        "destination": {
+          "type": "string",
+          "example": "Moon"
+        },
+        "launchDate": {
+          "type": "string",
+          "example": "2026"
+        },
+        "status": {
+          "type": "string",
+          "example": "Planned"
+        },
+        "crewSize": {
+          "type": "integer",
+          "example": 4
+        }
+      }
+    }
+  }
+}
