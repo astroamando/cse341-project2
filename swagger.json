@@ -5,9 +5,9 @@
     "title": "Aerospace API",
     "description": "CSE 341 Project 2 API for aircraft and space missions"
   },
-  "host": "localhost:8080",
+  "host": "cse341-project2-pdui.onrender.com",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": ["https"],
   "tags": [
     {
       "name": "Aircraft",
