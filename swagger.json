@@ -5,10 +5,10 @@
     "description": "CSE 341 Project 2 API for aircraft and space missions",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "cse341-project2-pdui.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/": {
