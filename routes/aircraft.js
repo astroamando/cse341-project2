@@ -3,6 +3,17 @@ const router = express.Router();
 
 const aircraftController = require('../controllers/aircraft');
 
+// Authentication middleware
+const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated && req.isAuthenticated()) {
+    return next();
+  }
+
+  return res.status(401).json({
+    message: 'Authentication required'
+  });
+};
+
 router.get('/', aircraftController.getAll);
 /*
   #swagger.tags = ['Aircraft']
@@ -15,10 +26,13 @@ router.get('/:id', aircraftController.getSingle);
   #swagger.description = 'Get one aircraft by ID'
 */
 
-router.post('/', aircraftController.createAircraft);
+router.post('/', isAuthenticated, aircraftController.createAircraft);
 /*
   #swagger.tags = ['Aircraft']
-  #swagger.description = 'Create a new aircraft'
+  #swagger.description = 'Create a new aircraft - authentication required'
+  #swagger.responses[401] = {
+    description: 'Authentication required'
+  }
   #swagger.parameters['body'] = {
     in: 'body',
     required: true,
@@ -26,10 +40,13 @@ router.post('/', aircraftController.createAircraft);
   }
 */
 
-router.put('/:id', aircraftController.updateAircraft);
+router.put('/:id', isAuthenticated, aircraftController.updateAircraft);
 /*
   #swagger.tags = ['Aircraft']
-  #swagger.description = 'Update an aircraft'
+  #swagger.description = 'Update an aircraft - authentication required'
+  #swagger.responses[401] = {
+    description: 'Authentication required'
+  }
   #swagger.parameters['body'] = {
     in: 'body',
     required: true,
@@ -37,10 +54,13 @@ router.put('/:id', aircraftController.updateAircraft);
   }
 */
 
-router.delete('/:id', aircraftController.deleteAircraft);
+router.delete('/:id', isAuthenticated, aircraftController.deleteAircraft);
 /*
   #swagger.tags = ['Aircraft']
-  #swagger.description = 'Delete an aircraft'
+  #swagger.description = 'Delete an aircraft - authentication required'
+  #swagger.responses[401] = {
+    description: 'Authentication required'
+  }
 */
 
 module.exports = router;
