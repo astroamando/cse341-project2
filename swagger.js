@@ -11,9 +11,7 @@ const doc = {
 
 const outputFile = './swagger.json';
 
-const endpointsFiles = [
-  './routes/aircraft.js',
-  './routes/missions.js'
-];
+// Scan index.js so Swagger sees the /aircraft and /missions prefixes
+const endpointsFiles = ['./index.js'];
 
 swaggerAutogen(outputFile, endpointsFiles, doc);
